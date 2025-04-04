@@ -2,6 +2,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+from api.v1.routes import api_version_one
 
 app = FastAPI(title="Book It", version="1.0.0")
 
@@ -13,6 +14,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(api_version_one)
 
 @app.get("/")
 def read_root():
